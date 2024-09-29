@@ -1,14 +1,17 @@
 export interface IDocument {
   id: string;
   name: string;
-  status: string;
-  tags: string[];
+  description: string;
+  template: string;
   date: string;
-  validations: number;
+  status: string;
+  validation: number;
   pendingValidation: boolean;
   favorite: boolean;
+  tags: string[];
+  constraints: any[];
+  sourceEvaluation: string;
 }
-
 export interface ILanguageOption {
   name: string;
   code: string;

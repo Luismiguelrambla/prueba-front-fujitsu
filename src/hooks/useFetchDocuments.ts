@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchDocuments } from '../services/documentService';
-import IDocument from '../types/interfaces';
+import { IDocument } from '../types/interfaces';
 
 export const useFetchDocuments = () => {
   const [documents, setDocuments] = useState<IDocument[]>([]);
@@ -9,7 +9,7 @@ export const useFetchDocuments = () => {
   useEffect(() => {
     const getDocuments = async () => {
       const data = await fetchDocuments();
-      setDocuments(data as IDocument[]);
+      setDocuments(data);
       setLoading(false);
     };
 
