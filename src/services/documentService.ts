@@ -17,7 +17,6 @@ export const deleteDocuments = async (ids: string[]): Promise<void> => {
   try {
     const deletePromises = ids.map(id => axios.delete(`${API_URL}/${id}`));
     await Promise.all(deletePromises);
-    console.log(`Documents with IDs ${ids.join(', ')} deleted successfully.`);
   } catch (error) {
     console.error(`Error deleting documents with IDs ${ids.join(', ')}`, error);
     throw error;
@@ -27,7 +26,6 @@ export const deleteDocuments = async (ids: string[]): Promise<void> => {
 export const updateFavoriteStatus = async (id: string, favorite: boolean): Promise<IDocument> => {
   try {
     const response = await axios.put<IDocument>(`${API_URL}/${id}`, { favorite });
-    console.log(`Document with ID ${id} updated successfully.`);
     return response.data;
   } catch (error) {
     console.error(`Error updating favorite status for document with ID ${id}`, error);
