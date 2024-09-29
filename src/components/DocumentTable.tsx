@@ -13,23 +13,20 @@ import TagBody from './TagBodyDocument';
 import MenuBody from './MenuBodyDocument';
 import { useTranslation } from 'react-i18next';
 import { IDocument } from '../types/interfaces';
+import { useDocuments } from '../context/DocumentContext';
 import './DocumentTable.css';
 import { Button } from 'primereact/button';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { InputText } from 'primereact/inputtext';
-
 import { FilterMatchMode } from 'primereact/api';
 
 interface DocumentTableProps {
-  documents: IDocument[];
-  loading: boolean;
+  isViewingEnabled: boolean;
 }
 
-const DocumentTable: React.FC<DocumentTableProps> = ({
-  documents,
-  loading,
-}) => {
+const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
+  const { documents, loading, deleteDocuments } = useDocuments();
   const { t } = useTranslation();
   const [selectedDocuments, setSelectedDocuments] = useState<
     IDocument[] | null
@@ -43,9 +40,13 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
   });
 
+  const filteredDocuments = isViewingEnabled
+    ? documents
+    : documents.filter((doc) => doc.status !== 'Procesado');
+
   const expandAll = () => {
     const _expandedRows: DataTableExpandedRows = {};
-    documents.forEach((doc) => (_expandedRows[doc.id] = true));
+    filteredDocuments.forEach((doc) => (_expandedRows[doc.id] = true));
     setExpandedRows(_expandedRows);
   };
 
@@ -55,9 +56,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
     const value = e.target.value;
     let _filters = { ...filters };
 
-    // @ts-ignore
     _filters['global'].value = value;
-
     setFilters(_filters);
     setGlobalFilterValue(value);
   };
@@ -87,16 +86,23 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
         </div>
       </div>
       <DataTable
-        value={documents}
+        value={filteredDocuments}
         expandedRows={expandedRows}
         onRowToggle={(e) => setExpandedRows(e.data)}
         rowExpansionTemplate={(e: IDocument) => <RowExpansion document={e} />}
         header={
           <DocumentTableHeader
-            documentsCount={documents.length}
+            documentsCount={filteredDocuments.length}
             selectedDocumentsCount={selectedDocuments?.length ?? 0}
             expandAll={expandAll}
             collapseAll={collapseAll}
+            onDelete={async () => {
+              const idsToDelete = selectedDocuments?.map((doc) => doc.id);
+              if (idsToDelete) {
+                await deleteDocuments(idsToDelete);
+                setSelectedDocuments(null);
+              }
+            }}
           />
         }
         paginator

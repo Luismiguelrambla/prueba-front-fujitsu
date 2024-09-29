@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button } from 'primereact/button';
 import { useTranslation } from 'react-i18next';
+import { IDocument } from '../types/interfaces';
 
 interface DocumentTableHeaderProps {
   documentsCount: number;
   selectedDocumentsCount: number;
   expandAll: () => void;
   collapseAll: () => void;
+  onDelete: () => Promise<void>;
 }
 
 const DocumentTableHeader: React.FC<DocumentTableHeaderProps> = ({
@@ -14,8 +16,10 @@ const DocumentTableHeader: React.FC<DocumentTableHeaderProps> = ({
   selectedDocumentsCount,
   expandAll,
   collapseAll,
+  onDelete,
 }) => {
   const { t } = useTranslation();
+
   return (
     <>
       <div className="p-datatable-header-text">
@@ -27,6 +31,7 @@ const DocumentTableHeader: React.FC<DocumentTableHeaderProps> = ({
             className="p-trash-button"
             icon="pi pi-trash"
             label={`${t('documentTable.remove')} (${selectedDocumentsCount})`}
+            onClick={onDelete}
           />
         )}
         <Button
