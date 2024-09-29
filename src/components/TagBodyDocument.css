@@ -1,0 +1,13 @@
+.tag-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  .p-tag {
+    display: flex;
+    padding: 3.5px 5.6px;
+    align-items: center;
+    gap: 3.5px;
+  }
+}

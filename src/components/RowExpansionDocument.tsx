@@ -1,7 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { IDocument } from '../types/interfaces';
 
-const RowExpansion: React.FC = () => {
+interface RowExpansionProps {
+  document: IDocument;
+}
+
+const RowExpansion: React.FC<RowExpansionProps> = ({ document }) => {
   const { t } = useTranslation();
 
   return (
@@ -9,17 +14,14 @@ const RowExpansion: React.FC = () => {
       <img src="src/assets/pdf-file-icon.svg" alt="PDF Icon" />
       <div className="expansion-container">
         <div>
-          <p className="title">Nombre del documento.pdf</p>
-          <p className="subtitle">
-            Departamento de origen de este documento, puede doblar las líneas
-            que sean necesarias
-          </p>
+          <p className="title">{document.name}</p>
+          <p className="subtitle">{document.description}</p>
         </div>
         <div>
           <p className="title">
             {t('documentTable.rowExpansion.sourceEvaluation')}
           </p>
-          <p className="subtitle">Evaluación</p>
+          <p className="subtitle">{document.sourceEvaluation}</p>
         </div>
       </div>
       <div className="expansion-container">
@@ -27,11 +29,11 @@ const RowExpansion: React.FC = () => {
           <p className="title">
             {t('documentTable.rowExpansion.templateUsed')}
           </p>
-          <p className="subtitle">Nombre plantilla utilizada en este doc</p>
+          <p className="subtitle">{document.template}</p>
         </div>
         <div>
           <p className="title">{t('documentTable.rowExpansion.dateCreated')}</p>
-          <p className="subtitle">20/05/2023 - 12:20 h</p>
+          <p className="subtitle">{document.date} h</p>
         </div>
       </div>
       <div className="expansion-container">
@@ -39,14 +41,14 @@ const RowExpansion: React.FC = () => {
           <p className="title">
             {t('documentTable.rowExpansion.documentRestrictions')}
           </p>
-          <p className="subtitle">3 restriciones Ver</p>
+          <p className="subtitle">
+            {document.constraints.length} Restricciones. Ver
+          </p>
         </div>
 
         <div>
           <p className="title">{t('documentTable.rowExpansion.tags')}</p>
-          <p className="subtitle">
-            Etiqueta 1, Equtiqueta 2, Etiequeta 3, Etiqueta 4, Etiqueta 5, +3
-          </p>
+          <p className="subtitle">{document.tags.bag} Etiquetas</p>
         </div>
       </div>
     </div>

@@ -90,7 +90,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
         value={documents}
         expandedRows={expandedRows}
         onRowToggle={(e) => setExpandedRows(e.data)}
-        rowExpansionTemplate={() => <RowExpansion />}
+        rowExpansionTemplate={(e: IDocument) => <RowExpansion document={e} />}
         header={
           <DocumentTableHeader
             documentsCount={documents.length}
@@ -112,7 +112,6 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
         scrollable
         scrollHeight="80vh"
         filters={filters}
-        filterDisplay="row"
         globalFilterFields={['name']}
         emptyMessage="No documents found."
       >
@@ -157,7 +156,9 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
           sortable
         />
         <Column
-          body={() => <i className="pi pi-star" />}
+          body={(data) => (
+            <i className={`pi pi-star${data.favorite ? '-fill' : ''}`} />
+          )}
           style={{ width: '40px' }}
         />
         <Column body={() => <MenuBody />} style={{ width: '40px' }} />

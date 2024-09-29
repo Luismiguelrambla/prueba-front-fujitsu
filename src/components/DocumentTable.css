@@ -325,3 +325,7 @@
 .p-menuitem-link {
   gap: 7px;
 }
+
+.pi.pi-star-fill {
+  color: #EAB308;
+}

@@ -1,3 +1,7 @@
+export interface ITags {
+  bag: number;
+  box: number;
+}
 export interface IDocument {
   id: string;
   name: string;
@@ -8,7 +12,7 @@ export interface IDocument {
   validation: number;
   pendingValidation: boolean;
   favorite: boolean;
-  tags: string[];
+  tags: ITags;
   constraints: any[];
   sourceEvaluation: string;
 }
