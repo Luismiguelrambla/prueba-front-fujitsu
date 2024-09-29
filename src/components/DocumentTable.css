@@ -326,6 +326,10 @@
   gap: 7px;
 }
 
+.pi.pi-star {
+  color: #9E9E9E;
+}
+
 .pi.pi-star-fill {
   color: #EAB308;
 }

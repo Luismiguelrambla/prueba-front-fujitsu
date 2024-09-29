@@ -6,6 +6,7 @@ interface DocumentContextType {
   documents: IDocument[];
   loading: boolean;
   deleteDocuments: (ids: string[]) => Promise<void>;
+  setDocuments: React.Dispatch<React.SetStateAction<IDocument[]>>;
 }
 
 const DocumentContext = createContext<DocumentContextType | undefined>(
@@ -47,7 +48,12 @@ export const DocumentProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <DocumentContext.Provider
-      value={{ documents, loading, deleteDocuments: handleDeleteDocuments }}
+      value={{
+        documents,
+        loading,
+        deleteDocuments: handleDeleteDocuments,
+        setDocuments,
+      }}
     >
       {children}
     </DocumentContext.Provider>

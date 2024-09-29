@@ -21,13 +21,14 @@ import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
 import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
+import { updateFavoriteStatus } from '../services/documentService';
 
 interface DocumentTableProps {
   isViewingEnabled: boolean;
 }
 
 const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
-  const { documents, loading, deleteDocuments } = useDocuments();
+  const { documents, loading, deleteDocuments, setDocuments } = useDocuments();
   const { t } = useTranslation();
   const [selectedDocuments, setSelectedDocuments] = useState<
     IDocument[] | null
@@ -56,11 +57,26 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
   const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     let _filters = { ...filters };
-
     (_filters['global'] as DataTableFilterMetaData).value = value;
-
     setFilters(_filters);
     setGlobalFilterValue(value);
+  };
+
+  const toggleFavorite = async (doc: IDocument) => {
+    const updatedFavoriteStatus = !doc.favorite;
+    try {
+      const updatedDocuments = documents.map((document) =>
+        document.id === doc.id
+          ? { ...document, favorite: updatedFavoriteStatus }
+          : document
+      );
+      setDocuments(updatedDocuments);
+
+      await updateFavoriteStatus(doc.id, updatedFavoriteStatus);
+    } catch (error) {
+      console.error('Error updating favorite status:', error);
+      setDocuments(documents);
+    }
   };
 
   return (
@@ -165,7 +181,11 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
         />
         <Column
           body={(data) => (
-            <i className={`pi pi-star${data.favorite ? '-fill' : ''}`} />
+            <Button
+              icon={`pi pi-star${data.favorite ? '-fill' : ''}`}
+              className="p-button-text"
+              onClick={() => toggleFavorite(data)}
+            />
           )}
           style={{ width: '40px' }}
         />
