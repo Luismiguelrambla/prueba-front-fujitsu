@@ -10,7 +10,8 @@ import RowExpansion from './RowExpansionDocument';
 import NameBody from './NameBodyDocument';
 import TagBody from './TagBodyDocument';
 import MenuBody from './MenuBodyDocument';
-import IDocument from '../types/interfaces';
+import { useTranslation } from 'react-i18next';
+import { IDocument } from '../types/interfaces';
 import './DocumentTable.css';
 
 interface DocumentTableProps {
@@ -22,6 +23,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
   documents,
   loading,
 }) => {
+  const { t } = useTranslation();
   const [selectedDocuments, setSelectedDocuments] = useState<
     IDocument[] | null
   >(null);
@@ -72,19 +74,19 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
       />
       <Column
         field="name"
-        header="Nombre"
+        header={t('documentTable.nameHeader')}
         body={(data) => <NameBody name={data.name} />}
         sortable
       />
       <Column
         field="tags"
-        header="Etiquetas"
+        header={t('documentTable.tagsHeader')}
         body={(data) => <TagBody tags={data.tags} />}
         sortable
       />
       <Column
         field="status"
-        header="Estado"
+        header={t('documentTable.statusHeader')}
         body={(data) => (
           <span className="p-column-statusBody">{data.status}</span>
         )}
@@ -92,7 +94,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
       />
       <Column
         field="date"
-        header="Fecha"
+        header={t('documentTable.dateHeader')}
         body={(data) => <span className="p-column-dateBody">{data.date}</span>}
         sortable
       />

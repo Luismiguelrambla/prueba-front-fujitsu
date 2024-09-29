@@ -1,16 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface NameBodyProps {
   name: string;
 }
 
 const NameBody: React.FC<NameBodyProps> = ({ name }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="p-column-nameBody">
       <span>{name}</span>
       <div className="p-column-nameBody-sub">
         <div>
-          <p>Documento - PDF</p>
+          <p>{t('documentTable.documentType')}</p>
           <img src="src/assets/arrows.svg" alt="arrows" />
         </div>
         <p
