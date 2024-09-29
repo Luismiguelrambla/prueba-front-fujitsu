@@ -10,7 +10,11 @@ const languageOptions: ILanguageOption[] = [
   { name: '🇬🇧 English', code: 'en' },
 ];
 
-const Header = () => {
+interface HeaderProps {
+  onSwitchChange: (isChecked: boolean) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onSwitchChange }) => {
   const { t, i18n } = useTranslation();
   const [checked, setChecked] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] =
@@ -39,6 +43,7 @@ const Header = () => {
 
   const handleSwitchChange = (e: InputSwitchChangeEvent) => {
     setChecked(e.value);
+    onSwitchChange(e.value);
   };
 
   const handleLanguageChange = (e: { value: ILanguageOption }) => {

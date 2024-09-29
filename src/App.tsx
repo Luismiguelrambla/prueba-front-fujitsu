@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -10,11 +11,20 @@ import './App.css';
 
 function App() {
   const { documents, loading } = useFetchDocuments();
+  const [isViewingEnabled, setIsViewingEnabled] = useState<boolean>(false);
+
+  const handleSwitchChange = (isChecked: boolean) => {
+    setIsViewingEnabled(isChecked);
+  };
+
+  const filteredDocuments = isViewingEnabled
+    ? documents
+    : documents.filter((doc) => doc.status !== 'Procesado');
 
   return (
     <>
-      <Header />
-      <DocumentTable documents={documents} loading={loading} />
+      <Header onSwitchChange={handleSwitchChange} />
+      <DocumentTable documents={filteredDocuments} loading={loading} />
     </>
   );
 }
