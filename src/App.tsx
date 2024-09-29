@@ -3,6 +3,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './App.css';
+import Header from './components/Header';
 import DocumentTable from './components/DocumentTable';
 import { useFetchDocuments } from './hooks/useFetchDocuments';
 
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <DocumentTable documents={documents} loading={loading} />
     </>
   );

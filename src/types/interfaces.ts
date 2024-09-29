@@ -1,4 +1,4 @@
-interface IDocument {
+export interface IDocument {
   id: string;
   name: string;
   status: string;
@@ -9,4 +9,7 @@ interface IDocument {
   favorite: boolean;
 }
 
-export default IDocument 
+export interface ILanguageOption {
+  name: string;
+  code: string;
+};
