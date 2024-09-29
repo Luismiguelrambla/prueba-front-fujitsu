@@ -1,3 +1,72 @@
+.document-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+  width: 100%;
+}
+
+.back-title-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-button-title {
+  display: flex;
+  gap: 16px;
+
+  Button {
+    width: 42px;
+    padding: 10.5px 0px;
+  }
+}
+
+.folder-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #212121;
+
+  .pi.pi-folder {
+    font-size: 22px;
+  }
+
+  span {
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+  }
+}
+
+.document-table-search {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+
+  .pi.pi-search {
+    font-size: 14px;
+  }
+
+  .p-inputtext {
+    width: 414px;
+    height: 38px;
+    color: #6B7280;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  Button {
+    width: 42px;
+    padding: 10.5px 0px;
+  }
+}
+
 .p-datatable-header {
   display: flex;
   justify-content: space-between;
@@ -54,9 +123,7 @@
 }
 
 .p-datatable {
-  width: 1436px;
   height: auto;
-  margin-top: 40px;
 }
 
 .p-sortable-column {

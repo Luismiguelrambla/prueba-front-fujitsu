@@ -3,3 +3,11 @@
   margin: 0 auto;
   /* padding: 2rem; */
 }
+
+.page-container {
+  
+  display: flex;
+  margin-top: 86px;
+  padding: 40px 84px 45px 96px;
+  gap: 24px;
+}
