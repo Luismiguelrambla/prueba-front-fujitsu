@@ -3,6 +3,7 @@ import {
   DataTable,
   DataTableExpandedRows,
   DataTableFilterMeta,
+  DataTableFilterMetaData,
   DataTableValueArray,
 } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -56,7 +57,8 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
     const value = e.target.value;
     let _filters = { ...filters };
 
-    _filters['global'].value = value;
+    (_filters['global'] as DataTableFilterMetaData).value = value;
+
     setFilters(_filters);
     setGlobalFilterValue(value);
   };
