@@ -65,7 +65,7 @@ const Header = () => {
             onChange={handleLanguageChange}
             options={languageOptions}
             optionLabel="name"
-            placeholder="Select language"
+            placeholder={t('header.selectLanguage')}
           />
         </div>
       </div>

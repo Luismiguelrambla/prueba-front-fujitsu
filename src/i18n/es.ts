@@ -1,7 +1,8 @@
 export const es = {
   header: {
     title: 'Prueba front-end developer',
-    enableViewingPermissions: 'Habilitar permisos de visualización'
+    enableViewingPermissions: 'Habilitar permisos de visualización',
+    selectLanguage: 'Seleccionar idioma'
   },
   documentTable: {
     contains: 'Contiene',

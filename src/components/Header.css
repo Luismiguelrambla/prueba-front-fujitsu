@@ -41,13 +41,13 @@
 .option-language {
   display: flex;
   align-items: flex-start;
-}
-
-.p-dropdown {
-  display: flex;
-  width: 216px;
-  height: 38px;
-  padding: 10.5px;
-  align-items: center;
-  gap: 10.5px;
+  
+  .p-dropdown {
+    display: flex;
+    width: 216px;
+    height: 38px;
+    padding: 10.5px;
+    align-items: center;
+    gap: 10.5px;
+  }
 }
