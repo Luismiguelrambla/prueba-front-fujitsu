@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'primereact/button';
 import { useTranslation } from 'react-i18next';
-import { IDocument } from '../types/interfaces';
 
 interface DocumentTableHeaderProps {
   documentsCount: number;

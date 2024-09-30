@@ -2,7 +2,9 @@ export const es = {
   header: {
     title: 'Prueba front-end developer',
     enableViewingPermissions: 'Habilitar permisos de visualización',
-    selectLanguage: 'Seleccionar idioma'
+    selectLanguage: 'Seleccionar idioma',
+    search: 'Buscar por nombre',
+    emptyMessage: 'No se han encontrado documentos'
   },
   documentTable: {
     contains: 'Contiene',
@@ -32,5 +34,9 @@ export const es = {
       documentRestrictions: 'Restricciones del documento',
       tags: 'Etiquetas'
     }
+  },
+  NavTree: {
+    filterPlaceholder: 'Filtrar carpetas del expediente',
+    emptyMessage: 'No hay opciones disponibles'
   }
 }

@@ -8,7 +8,7 @@ import './i18n';
 import Header from './components/Header';
 import NavTree from './components/NavTree';
 import DocumentTable from './components/DocumentTable';
-import { DocumentProvider } from './context/DocumentContext'; // Importa el contexto
+import { DocumentProvider } from './context/DocumentContext';
 import './App.css';
 
 function App() {

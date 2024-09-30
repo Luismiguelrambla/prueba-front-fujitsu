@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface NameBodyProps {
@@ -7,6 +7,20 @@ interface NameBodyProps {
 
 const NameBody: React.FC<NameBodyProps> = ({ name }) => {
   const { t } = useTranslation();
+  const [isSmallerWidth, setIsSmallerWidth] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallerWidth(window.innerWidth < 1650);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="p-column-nameBody">
@@ -16,14 +30,16 @@ const NameBody: React.FC<NameBodyProps> = ({ name }) => {
           <p>{t('documentTable.documentType')}</p>
           <img src="src/assets/arrows.svg" alt="arrows" />
         </div>
-        <p
-          className="p-column-nameBody-breadcrumbs"
-          title={
-            'Expedientes > Contenido Islas Baleares > Expedientes Material'
-          }
-        >
-          {'Expedientes > Contenido Islas Baleares > Expedientes Material'}
-        </p>
+        {!isSmallerWidth && (
+          <p
+            className="p-column-nameBody-breadcrumbs"
+            title={
+              'Expedientes > Contenido Islas Baleares > Expedientes Material'
+            }
+          >
+            {'Expedientes > Contenido Islas Baleares > Expedientes Material'}
+          </p>
+        )}
       </div>
     </div>
   );

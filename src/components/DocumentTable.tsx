@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   DataTable,
   DataTableExpandedRows,
@@ -41,6 +41,20 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
   });
+  const [isSmallerWidth, setIsSmallerWidth] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallerWidth(window.innerWidth < 1310);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const filteredDocuments = isViewingEnabled
     ? documents
@@ -96,11 +110,11 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
             <InputText
               value={globalFilterValue}
               onChange={onGlobalFilterChange}
-              placeholder="Buscar por nombre"
+              placeholder={t('header.search')}
             />
           </IconField>
 
-          <Button icon="pi pi-filter" />
+          <Button icon="pi pi-sliders-h" />
         </div>
       </div>
       <DataTable
@@ -137,7 +151,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
         scrollHeight="80vh"
         filters={filters}
         globalFilterFields={['name']}
-        emptyMessage="No documents found."
+        emptyMessage={t('header.emptyMessage')}
       >
         <Column selectionMode="multiple" style={{ width: '40px' }} />
         <Column expander style={{ width: '40px' }} />
@@ -153,6 +167,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
         />
         <Column
           field="tags"
+          hidden={isSmallerWidth}
           header={t('documentTable.tagsHeader')}
           body={(data) => <TagBody tags={data.tags} />}
           sortable
@@ -167,6 +182,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
         />
         <Column
           field="date"
+          hidden={isSmallerWidth}
           header={t('documentTable.dateHeader')}
           body={(data) => (
             <span className="p-column-dateBody">{data.date}</span>

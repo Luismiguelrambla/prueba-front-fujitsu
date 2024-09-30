@@ -2,7 +2,9 @@ export const en = {
   header: {
     title: 'Test front-end developer',
     enableViewingPermissions: 'Enable viewing permissions',
-    selectLanguage: 'Select language'
+    selectLanguage: 'Select language',
+    search: 'Search by name',
+    emptyMessage: 'No documents found'
   },
   documentTable: {
     contains: 'Contains',
@@ -32,5 +34,9 @@ export const en = {
       documentRestrictions: 'Restrictions of the document',
       tags: 'Tags'
     }
+  },
+  NavTree: {
+    filterPlaceholder: 'Filter file folders',
+    emptyMessage: 'No available options'
   }
 }

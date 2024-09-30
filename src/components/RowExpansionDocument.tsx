@@ -42,13 +42,15 @@ const RowExpansion: React.FC<RowExpansionProps> = ({ document }) => {
             {t('documentTable.rowExpansion.documentRestrictions')}
           </p>
           <p className="subtitle">
-            {document.constraints.length} Restricciones. Ver
+            {document.constraints.length} Restricciones
           </p>
         </div>
 
         <div>
           <p className="title">{t('documentTable.rowExpansion.tags')}</p>
-          <p className="subtitle">{document.tags.bag} Etiquetas</p>
+          <p className="subtitle">
+            {document.tags.bag + document.tags.box} Etiquetas
+          </p>
         </div>
       </div>
     </div>

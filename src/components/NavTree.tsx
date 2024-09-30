@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Tree } from 'primereact/tree';
 import { TreeNode } from 'primereact/treenode';
 import './NavTree.css';
+import { useTranslation } from 'react-i18next';
 
 export const NodeService = {
   getTreeNodesData() {
@@ -41,6 +42,7 @@ export const NodeService = {
 };
 
 const NavTree = () => {
+  const { t } = useTranslation();
   const [nodes, setNodes] = useState<TreeNode[]>([]);
 
   useEffect(() => {
@@ -53,7 +55,8 @@ const NavTree = () => {
         value={nodes}
         filter
         filterMode="strict"
-        filterPlaceholder="Filtrar carpetas del expediente"
+        filterPlaceholder={t('NavTree.filterPlaceholder')}
+        emptyMessage={t('NavTree.emptyMessage')}
       />
     </>
   );
