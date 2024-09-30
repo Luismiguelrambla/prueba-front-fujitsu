@@ -12,24 +12,28 @@ export const NodeService = {
         label: 'Bandeja de entrada',
         data: 'Bandeja de entrada',
         icon: 'pi pi-fw pi-inbox',
+        ariaLabel: 'Bandeja de entrada',
       },
       {
         key: '1',
         label: 'Contenido de las Islas Baleares',
         data: 'Contenido de las Islas Baleares',
         icon: 'pi pi-fw pi-folder-open',
+        ariaLabel: 'Contenido de las Islas Baleares',
         children: [
           {
             key: '1-0',
             label: 'Expediente Personal',
             icon: 'pi pi-fw pi-folder',
             data: 'Expediente Personal',
+            ariaLabel: 'Expediente Personal',
           },
           {
             key: '1-1',
             label: 'Expedientes Material',
             icon: 'pi pi-fw pi-folder',
             data: 'Expedientes Material',
+            ariaLabel: 'Expedientes Material',
           },
         ],
       },
@@ -57,6 +61,7 @@ const NavTree = () => {
         filterMode="strict"
         filterPlaceholder={t('NavTree.filterPlaceholder')}
         emptyMessage={t('NavTree.emptyMessage')}
+        aria-label="tree"
       />
     </>
   );

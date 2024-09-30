@@ -284,7 +284,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 300px;
+  width: auto;
 }
 
 .expansion-row p.title {
@@ -332,4 +332,31 @@
 
 .pi.pi-star-fill {
   color: #EAB308;
+}
+
+.p-column-validation-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #D46213;
+
+  .pi.pi-info-circle {
+  color: #D46213;
+  }
+}
+
+.p-column-validation-container-high {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #B32B23;
+
+  .pi.pi-info-circle {
+    color: #B32B23;
+  }
+}
+
+.p-validation {
+  display: flex;
+  flex-direction: column;
 }

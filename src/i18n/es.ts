@@ -16,6 +16,7 @@ export const es = {
     nameHeader: 'Nombre',
     tagsHeader: 'Etiquetas',
     statusHeader: 'Estado',
+    validation: 'Validar antes de',
     dateHeader: 'Fecha',
     documentType: 'Documento - PDF',
     docuemntStatus: {
@@ -32,7 +33,8 @@ export const es = {
       templateUsed: 'Plantilla utilizada',
       dateCreated: 'Fecha de creación',
       documentRestrictions: 'Restricciones del documento',
-      tags: 'Etiquetas'
+      tags: 'Etiquetas',
+      restrictions: 'Restricciones'
     }
   },
   NavTree: {

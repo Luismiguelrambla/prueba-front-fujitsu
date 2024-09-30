@@ -6,7 +6,7 @@
   top: 0;
   width: 100%;
 
-  background-image: linear-gradient(rgba(81, 76, 76, 0.80), rgba(81, 76, 76, 0.80)), url("src/assets/img-header.png");
+  background-image: linear-gradient(rgba(81, 76, 76, 0.80), rgba(81, 76, 76, 0.80)), url("/src/assets/img-header.png");
   background-position: 50%;
   background-size: cover;
   background-repeat: no-repeat;

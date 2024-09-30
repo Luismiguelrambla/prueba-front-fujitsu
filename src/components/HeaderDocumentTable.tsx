@@ -22,15 +22,22 @@ const DocumentTableHeader: React.FC<DocumentTableHeaderProps> = ({
   return (
     <>
       <div className="p-datatable-header-text">
-        <span>{`${t('documentTable.contains')} ${documentsCount} ${documentsCount === 1 ? `${t('documentTable.document')}` : `${t('documentTable.documents')}`}`}</span>
+        <span aria-live="polite">
+          {`${t('documentTable.contains')} ${documentsCount} ${documentsCount === 1 ? `${t('documentTable.document')}` : `${t('documentTable.documents')}`}`}
+        </span>
       </div>
-      <div className="p-datatable-header-button">
+      <div
+        className="p-datatable-header-button"
+        role="group"
+        aria-label="actions group"
+      >
         {selectedDocumentsCount > 0 && (
           <Button
             className="p-trash-button"
             icon="pi pi-trash"
             label={`${t('documentTable.remove')} (${selectedDocumentsCount})`}
             onClick={onDelete}
+            aria-label="delete selected"
           />
         )}
         <Button
@@ -39,6 +46,7 @@ const DocumentTableHeader: React.FC<DocumentTableHeaderProps> = ({
           label={`${t('documentTable.expandAll')}`}
           onClick={expandAll}
           text
+          aria-label="expand all"
         />
         <Button
           className="p-expand-collapse-button"
@@ -46,6 +54,7 @@ const DocumentTableHeader: React.FC<DocumentTableHeaderProps> = ({
           label={`${t('documentTable.collapseAll')}`}
           onClick={collapseAll}
           text
+          aria-label="collapse all"
         />
       </div>
     </>

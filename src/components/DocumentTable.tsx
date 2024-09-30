@@ -22,6 +22,8 @@ import { InputIcon } from 'primereact/inputicon';
 import { InputText } from 'primereact/inputtext';
 import { FilterMatchMode } from 'primereact/api';
 import { updateFavoriteStatus } from '../services/documentService';
+import pdfIcon from '../assets/pdf-icon.svg';
+import { Tooltip } from 'primereact/tooltip';
 
 interface DocumentTableProps {
   isViewingEnabled: boolean;
@@ -42,6 +44,8 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
     name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
   });
   const [isSmallerWidth, setIsSmallerWidth] = useState<boolean>(false);
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString('es-ES');
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,7 +62,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
 
   const filteredDocuments = isViewingEnabled
     ? documents
-    : documents.filter((doc) => doc.status !== 'Procesado');
+    : documents.filter((doc) => doc.validation > 2);
 
   const expandAll = () => {
     const _expandedRows: DataTableExpandedRows = {};
@@ -96,10 +100,10 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
   return (
     <div className="document-table-container">
       <div className="back-title-search">
-        <div className="back-button-title">
-          <Button icon="pi pi-arrow-left" outlined />
+        <div className="back-button-title" role="navigation">
+          <Button icon="pi pi-arrow-left" outlined aria-label="back button" />
           <div className="folder-name">
-            <i className="pi pi-folder" />
+            <i className="pi pi-folder" aria-hidden="true" />
             <span>Expedientes Material</span>
           </div>
         </div>
@@ -111,10 +115,11 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
               value={globalFilterValue}
               onChange={onGlobalFilterChange}
               placeholder={t('header.search')}
+              aria-label="header search"
             />
           </IconField>
 
-          <Button icon="pi pi-sliders-h" />
+          <Button icon="pi pi-sliders-h" aria-label="filter" />
         </div>
       </div>
       <DataTable
@@ -153,10 +158,14 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
         globalFilterFields={['name']}
         emptyMessage={t('header.emptyMessage')}
       >
-        <Column selectionMode="multiple" style={{ width: '40px' }} />
-        <Column expander style={{ width: '40px' }} />
         <Column
-          body={() => <img src="src/assets/pdf-icon.svg" alt="Icon" />}
+          selectionMode="multiple"
+          style={{ width: '40px' }}
+          aria-label="checkbox"
+        />
+        <Column expander style={{ width: '40px' }} aria-label="expand" />
+        <Column
+          body={() => <img src={pdfIcon} alt="pdf icon" />}
           style={{ width: '40px' }}
         />
         <Column
@@ -164,6 +173,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
           header={t('documentTable.nameHeader')}
           body={(data) => <NameBody name={data.name} />}
           sortable
+          aria-label="name header"
         />
         <Column
           field="tags"
@@ -171,14 +181,34 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
           header={t('documentTable.tagsHeader')}
           body={(data) => <TagBody tags={data.tags} />}
           sortable
+          aria-label="tags header"
         />
         <Column
           field="status"
           header={t('documentTable.statusHeader')}
           body={(data) => (
-            <span className="p-column-statusBody">{data.status}</span>
+            <>
+              <span className="p-column-statusBody">{data.status}</span>
+              {data.validation > 2 && (
+                <div
+                  className={`p-column-validation-container${data.validation > 3 ? '-high' : ''}`}
+                >
+                  <div className="p-validation">
+                    <span>{data.validation} validaciones grafo pendientes</span>
+                    <span>1 asignada a mí</span>
+                  </div>
+                  <Tooltip target=".info-validation" />
+                  <i
+                    className="info-validation pi pi-info-circle p-text-secondary p-overlay-badge"
+                    data-pr-tooltip={`${t('documentTable.validation')} ${formattedDate}`}
+                    data-pr-position="bottom"
+                  />
+                </div>
+              )}
+            </>
           )}
           sortable
+          aria-label="status header"
         />
         <Column
           field="date"
@@ -188,12 +218,14 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
             <span className="p-column-dateBody">{data.date}</span>
           )}
           sortable
+          aria-label="date header"
         />
         <Column
           field="id"
           header="ID"
           body={(data) => <span className="p-column-idBody">{data.id}</span>}
           sortable
+          aria-label="id header"
         />
         <Column
           body={(data) => (
@@ -201,6 +233,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({ isViewingEnabled }) => {
               icon={`pi pi-star${data.favorite ? '-fill' : ''}`}
               className="p-button-text"
               onClick={() => toggleFavorite(data)}
+              aria-label={data.favorite ? 'remove favorite' : 'add favorite'}
             />
           )}
           style={{ width: '40px' }}

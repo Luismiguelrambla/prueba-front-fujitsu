@@ -18,12 +18,20 @@ const MenuBody: React.FC = () => {
 
   return (
     <>
-      <Menu model={documentMenuItems} popup ref={menu} id="popup_menu_left" />
+      <Menu
+        model={documentMenuItems}
+        popup
+        ref={menu}
+        id="popup_menu_left"
+        aria-labelledby="menu_button"
+      />
       <Button
         icon="pi pi-ellipsis-v"
-        onClick={(event) => menu?.current?.toggle(event)}
         aria-controls="popup_menu_left"
-        aria-haspopup
+        aria-haspopup="true"
+        aria-expanded="false"
+        id="menu_button"
+        aria-label="documentTable.menuButton"
         text
       />
     </>

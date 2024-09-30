@@ -13,7 +13,7 @@ export interface IDocument {
   pendingValidation: boolean;
   favorite: boolean;
   tags: ITags;
-  constraints: any[];
+  constraints: string[];
   sourceEvaluation: string;
 }
 export interface ILanguageOption {
